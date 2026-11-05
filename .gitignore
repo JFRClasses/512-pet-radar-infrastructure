@@ -4,7 +4,8 @@
 ### Terraform ###
 # Local .terraform directories
 **/.terraform/*
-
+**/512-pet-radar-server/**
+**/512-pet-radar-server.pub/**
 # .tfstate files
 *.tfstate
 *.tfstate.*
