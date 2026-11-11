@@ -6,7 +6,7 @@ services:
     environment:
       - MAILER_SERVICE=${MAILER_SERVICE}
       - MAILER_USER=${MAILER_USER}
-      - MAILER_TOKEN=${MAILER_TOKEN}
+      - MAILER_PASSWORD=${MAILER_PASSWORD}
       - MAPBOX_TOKEN=${MAPBOX_TOKEN}
       - DB_NAME=${DB_NAME}
       - DB_HOST=${DB_HOST}
@@ -15,6 +15,7 @@ services:
       - DB_PORT=${DB_PORT}
       - REDIS_HOST=${REDIS_HOST}
       - REDIS_PORT=${REDIS_PORT}
+      - DB_TYPE=${DB_TYPE}
     command: ["npm","run","migration:run"]
     depends_on:
       postgres:

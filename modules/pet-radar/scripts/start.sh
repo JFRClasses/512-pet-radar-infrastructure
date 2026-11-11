@@ -15,6 +15,8 @@ systemctl enable --now docker
 usermod -aG docker ubuntu
 cd /containers/pet-radar-api
 
+echo "${compose_base64}" | base64 -d > compose.yaml
+
 cat > .env <<ENV
 MAILER_SERVICE=${MAILER_SERVICE}
 MAILER_USER=${MAILER_USER}
@@ -29,3 +31,5 @@ DB_TYPE=${DB_TYPE}
 REDIS_HOST=${REDIS_HOST}
 REDIS_PORT=${REDIS_PORT}
 ENV
+
+docker compose up -d
