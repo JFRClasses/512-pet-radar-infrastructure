@@ -13,3 +13,19 @@ apt-get update -y
 apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 systemctl enable --now docker
 usermod -aG docker ubuntu
+cd /containers/pet-radar-api
+
+cat > .env <<ENV
+MAILER_SERVICE=${MAILER_SERVICE}
+MAILER_USER=${MAILER_USER}
+MAILER_PASSWORD=${MAILER_PASSWORD}
+MAPBOX_TOKEN=${MAPBOX_TOKEN}
+DB_PASSWORD=${DB_PASSWORD}
+DB_NAME=${DB_NAME}
+DB_USER=${DB_USER}
+DB_HOST=${DB_HOST}
+DB_PORT=${DB_PORT}
+DB_TYPE=${DB_TYPE}
+REDIS_HOST=${REDIS_HOST}
+REDIS_PORT=${REDIS_PORT}
+ENV
