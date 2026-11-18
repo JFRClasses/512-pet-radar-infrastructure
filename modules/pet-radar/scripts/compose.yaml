@@ -1,5 +1,30 @@
 services:
-
+  reverse-proxy:
+    image: nginxproxy/nginx-proxy:alpine
+    container_name: reverse-proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - VIRTUAL_HOST=${MAIN_DOMAIN}
+      - VIRTUAL_PATH=/.well-known
+    volumes:
+      - /volumes/nginx/certs:/etc/nginx/certs:ro
+      - /volumes/nginx/vhostd:/etc/nginx/vhost.d
+      - /volumes/nginx/html:/usr/share/nginx/html:rw
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+ 
+  lets-encrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: always
+    environment:
+      - NGINX_PROXY_CONTAINER=reverse-proxy
+    volumes:
+      - /volumes/nginx/certs:/etc/nginx/certs
+      - /volumes/nginx/vhostd:/etc/nginx/vhost.d
+      - /volumes/nginx/html:/usr/share/nginx/html:rw
+      - /var/run/docker.sock:/var/run/docker.sock:ro
   migrations:
     image: juanfr97/512-pet-radar-api:latest
     container_name: PetRadarMigrator
@@ -23,9 +48,13 @@ services:
   pet-radar-api:
     image: juanfr97/512-pet-radar-api:latest
     container_name: PetRadarApi
-    ports:
-      - 3000:3000
+    expose:
+      - 3000
     environment:
+      - VIRTUAL_HOST=${MAIN_DOMAIN}
+      - VIRTUAL_PATH=/
+      - LETSENCRYPT_HOST=${MAIN_DOMAIN}
+      - LETSENCRYPT_EMAIL=juanfr97@hotmail.com
       - MAILER_SERVICE=${MAILER_SERVICE}
       - MAILER_USER=${MAILER_USER}
       - MAILER_PASSWORD=${MAILER_PASSWORD}

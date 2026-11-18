@@ -12,13 +12,20 @@ resource "aws_security_group" "pet_radar_sg" {
   }
 
   ingress {
-    description = "PetRadarApi"
-    from_port = 3000
-    to_port = 3000
+    description = "Http"
+    from_port = 80
+    to_port = 80
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    description = "Http"
+    from_port = 443
+    to_port = 443
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   ingress{
     description = "WireguardVPN"
     from_port = 51820

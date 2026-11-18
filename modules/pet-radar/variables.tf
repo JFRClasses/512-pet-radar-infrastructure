@@ -46,3 +46,7 @@ variable "redis_host"{
 variable "redis_port"{
   type = string
 }
+
+variable "main_domain" {
+  type = string
+}

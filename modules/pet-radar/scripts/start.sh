@@ -1,5 +1,8 @@
 #!/bin/bash
 mkdir -p /containers/pet-radar-api
+mkdir -p /volumes/nginx/certs
+mkdir -p /volumes/nginx/vhostd
+mkdir -p /volumes/nginx/html
 set -e
 
 export DEBIAN_FRONTEND=noninteractive
@@ -30,6 +33,7 @@ DB_PORT=${DB_PORT}
 DB_TYPE=${DB_TYPE}
 REDIS_HOST=${REDIS_HOST}
 REDIS_PORT=${REDIS_PORT}
+MAIN_DOMAIN=${MAIN_DOMAIN}
 ENV
 
 docker compose up -d

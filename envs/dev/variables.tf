@@ -34,3 +34,7 @@ variable "REDIS_HOST" {
 variable "REDIS_PORT" {
     type = string
 }
+
+variable "MAIN_DOMAIN" {
+  type = string
+}

@@ -16,4 +16,5 @@ module "pet-radar" {
   db_type = var.DB_TYPE
   db_port = var.DB_PORT
   db_name = var.DB_NAME
+  main_domain = var.MAIN_DOMAIN
 }

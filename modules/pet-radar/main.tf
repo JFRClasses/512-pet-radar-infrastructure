@@ -43,6 +43,7 @@ resource "aws_instance" "pet_radar_server" {
     DB_TYPE = var.db_type,
     REDIS_HOST = var.redis_host,
     REDIS_PORT = var.redis_port,
+    MAIN_DOMAIN = var.main_domain,
     compose_base64 = filebase64("${path.module}/scripts/compose.yaml")
   })
   root_block_device {
